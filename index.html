@@ -1,54 +1,281 @@
-<!DOCTYPE html>
+```
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name — Portfolio</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================================
+       Portfolio — Only HTML + CSS
+       - Single-file template
+       - Edit the :root variables and the content sections below
+       ================================ */
+
+    :root{
+      /* Color palette (green / earthy) */
+      --bg: #0f1720;              /* very dark */
+      --card: #0b1220;            /* slightly lighter */
+      --muted: #94a3b8;          /* cool gray for text */
+      --glass: rgba(255,255,255,0.04);
+
+      --accent: #2dd4bf;         /* teal-ish green (accent) */
+      --accent-2: #16a34a;       /* fresh green for buttons */
+      --accent-3: #a7f3d0;       /* pale mint for highlights */
+
+      --radius: 14px;
+      --max-width: 1100px;
+    }
+
+    /* Reset / base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(45,212,191,0.06), transparent),
+                  radial-gradient(900px 500px at 90% 90%, rgba(22,163,74,0.04), transparent),
+                  var(--bg);
+      color: #e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:40px 20px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+    }
+
+    /* Header / nav */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:28px;
+    }
+
+    .brand{
+      display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit
+    }
+    .logo{
+      width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'Poppins';
+      box-shadow:0 6px 18px rgba(12,18,24,0.6);
+    }
+    .brand h1{font-size:18px;margin:0}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    nav a:hover{color:var(--accent-3);background:rgba(255,255,255,0.02)}
+
+    .cta{
+      border:2px solid transparent;padding:8px 14px;border-radius:12px;font-weight:700;background:linear-gradient(90deg, rgba(255,255,255,0.04), transparent);
+      display:inline-block
+    }
+    .cta:hover{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#04211a}
+
+    /* Hero */
+    .hero{
+      display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;margin-bottom:36px
+    }
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:28px;border-radius:var(--radius);backdrop-filter: blur(6px);
+      box-shadow:0 8px 30px rgba(2,6,12,0.6);
+    }
+    .hero h2{font-family:'Poppins';font-size:28px;margin:0 0 8px}
+    .hero p.lead{color:var(--muted);margin-top:0;margin-bottom:18px}
+
+    .socials{display:flex;gap:10px}
+    .socials a{padding:8px;border-radius:10px;text-decoration:none;color:var(--muted);font-weight:600;background:var(--glass);display:inline-block}
+
+    .avatar{
+      width:100%;height:100%;max-width:320px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);
+      display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--card),rgba(255,255,255,0.02));
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* Grid for projects + about */
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:28px}
+
+    /* About / intro */
+    .about{background:var(--card);padding:20px;border-radius:12px}
+    .about h3{margin:0 0 8px}
+    .about p{color:var(--muted);margin:0}
+
+    /* Projects */
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .project{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.02);transition:transform .28s ease, box-shadow .28s ease;
+    }
+    .project:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,12,0.6)}
+    .project h4{margin:0 0 6px}
+    .project p{color:var(--muted);font-size:14px;margin:0}
+    .project .tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted)}
+
+    /* Skills */
+    .skills{display:flex;flex-direction:column;gap:8px}
+    .skill{display:flex;flex-direction:column;gap:6px}
+    .skill .bar{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden}
+    .skill .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:999px}
+
+    /* Contact */
+    .contact{background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px}
+    .contact form{display:flex;flex-direction:column;gap:10px}
+    .contact input,.contact textarea{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);padding:10px;border-radius:10px;color:inherit}
+    .btn-send{padding:10px 14px;border-radius:10px;font-weight:700;border:none;cursor:pointer;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#04211a}
+
+    footer{margin-top:30px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .grid{grid-template-columns:1fr}
+      .projects{grid-template-columns:repeat(1,1fr)}
+    }
+
+    @media (max-width:480px){
+      body{padding:20px}
+      .logo{width:44px;height:44px}
+      .brand h1{font-size:16px}
+    }
+  </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <h1>Hi, I'm Parth 👋</h1>
-    <p>Aspiring Developer | Tech Enthusiast | Problem Solver</p>
-  </header>
+  <div class="container">
+    <header>
+      <a class="brand" href="#">
+        <div class="logo">YN</div>
+        <div>
+          <h1>Your Name</h1>
+          <p>Designer • Frontend Developer</p>
+        </div>
+      </a>
 
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      I am a passionate developer who loves building small projects and learning new technologies.
-    </p>
-  </section>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a class="cta" href="#contact">Contact</a>
+      </nav>
+    </header>
 
-  <!-- Projects Section -->
-  <section id="projects">
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>📌 Project 1</h3>
-      <p>A simple calculator built using Java.</p>
-    </div>
-    <div class="project">
-      <h3>📌 Project 2</h3>
-      <p>A task manager app built with Python & Flask.</p>
-    </div>
-    <div class="project">
-      <h3>📌 Project 3</h3>
-      <p>A portfolio website (this one!)</p>
-    </div>
-  </section>
+    <main>
+      <section class="hero">
+        <div class="hero-card">
+          <h2>Hi, I'm <span style="color:var(--accent-3);font-weight:800">Your Name</span></h2>
+          <p class="lead">I design clean interfaces and build accessible, responsive front-ends. I love crafting delightful user experiences with HTML & CSS.</p>
+          <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px">
+            <a class="cta" href="#projects">See my work</a>
+            <a href="#contact" class="cta">Hire me</a>
+          </div>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-    <p>LinkedIn: <a href="#">linkedin.com/in/yourprofile</a></p>
-    <p>GitHub: <a href="#">github.com/yourprofile</a></p>
-  </section>
+          <div class="socials">
+            <a href="#">LinkedIn</a>
+            <a href="#">GitHub</a>
+            <a href="#">Dribbble</a>
+          </div>
+        </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Parth. All rights reserved.</p>
-  </footer>
+        <div class="avatar">
+          <!-- Replace the image src with your photo -->
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Your Avatar">
+        </div>
+      </section>
+
+      <section class="grid">
+        <div>
+          <section id="about" class="about" style="margin-bottom:16px">
+            <h3>About me</h3>
+            <p>I am a frontend developer and designer focused on building accessible and performant websites. I enjoy turning ideas into beautiful, usable products.</p>
+          </section>
+
+          <section id="projects" style="margin-bottom:16px">
+            <h3 style="margin-bottom:12px">Projects</h3>
+            <div class="projects">
+              <article class="project">
+                <h4>Project One</h4>
+                <p>Short description of the project — what it does and which technologies you used.</p>
+                <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Design</span></div>
+              </article>
+
+              <article class="project">
+                <h4>Project Two</h4>
+                <p>Short description of the project — a small case study or feature highlight.</p>
+                <div class="tags"><span class="tag">Frontend</span><span class="tag">Animation</span></div>
+              </article>
+
+              <article class="project">
+                <h4>Project Three</h4>
+                <p>Short description of the project — show results or link to a live demo.</p>
+                <div class="tags"><span class="tag">Responsive</span><span class="tag">UI</span></div>
+              </article>
+
+              <article class="project">
+                <h4>Project Four</h4>
+                <p>Short description. Keep it short and punchy.</p>
+                <div class="tags"><span class="tag">CSS Grid</span><span class="tag">Performance</span></div>
+              </article>
+            </div>
+          </section>
+
+          <section id="skills" style="margin-bottom:16px">
+            <h3 style="margin-bottom:12px">Skills</h3>
+            <div class="skills">
+              <div class="skill">
+                <div style="display:flex;justify-content:space-between;align-items:center"><strong>HTML &amp; Semantics</strong><span style="color:var(--muted)">95%</span></div>
+                <div class="bar"><i style="width:95%"></i></div>
+              </div>
+
+              <div class="skill">
+                <div style="display:flex;justify-content:space-between;align-items:center"><strong>CSS (Layouts & Anim)</strong><span style="color:var(--muted)">90%</span></div>
+                <div class="bar"><i style="width:90%"></i></div>
+              </div>
+
+              <div class="skill">
+                <div style="display:flex;justify-content:space-between;align-items:center"><strong>Responsive Design</strong><span style="color:var(--muted)">92%</span></div>
+                <div class="bar"><i style="width:92%"></i></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <aside>
+          <div class="contact">
+            <h3>Contact</h3>
+            <p style="color:var(--muted);margin-top:6px;margin-bottom:10px">Want to work together? Send a message — form is non-functional (HTML-only).</p>
+            <form>
+              <input placeholder="Your name" />
+              <input placeholder="Your email" />
+              <textarea rows="4" placeholder="Message"></textarea>
+              <button type="button" class="btn-send">Send message</button>
+            </form>
+          </div>
+
+          <div style="margin-top:16px;background:var(--card);padding:16px;border-radius:12px">
+            <h4 style="margin:0 0 8px">Quick facts</h4>
+            <p style="margin:0;color:var(--muted)">Based in City • Open to remote work • Available for freelance</p>
+          </div>
+        </aside>
+      </section>
+
+      <footer>
+        <p>© <span id="year">2025</span> Your Name. Built with ❤️ using HTML & CSS.</p>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>
+
+```
